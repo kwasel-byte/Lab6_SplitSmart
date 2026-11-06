@@ -12,6 +12,21 @@
 - `Depends on` references task IDs that must be complete first.
 - Story references: **US1** account; **US2** groups; **US3** expenses/approvals; **US4** balances/payments; **US5** reports; **US6** requested web/mobile platforms.
 
+
+## Lab 7 Consolidation References and Open Gates
+
+Use [architecture-selected.md](architecture-selected.md) and [design.md](design.md) as the selected layered design, per the [review](Lab7_Architecture_Review.md) and [instructions](Lab7_Consolidation_Instructions.md). Use [requirements-traceability.md](requirements-traceability.md) as the canonical requirement/design/test evidence map. Preserve both comparison proposals; do not implement event sourcing or CQRS.
+
+[Open gates G1–G8](architecture-selected.md#open-decision-gates) remain unresolved. T001–T005 and other policy-dependent tasks are not completed by architecture selection. NFR-001 / US6 / SC-005 remain unmet by the Swing milestone. All implementation tasks remain unchecked; Lab 7 supplies documentation, not application/test execution.
+
+Reliability acceptance refinements for existing tasks:
+
+- T013, T033, T035, T043–T044: define durable transaction/retry contracts; persist operation keys, fingerprints and business results atomically; enforce conditional review and current-debt validation inside appropriate concurrency boundaries.
+- T034, T036, T038: verify receipt staging/cleanup, atomic reference integrity and one creation notice per recipient under retries; exact storage protocol remains T002.
+- T019, T037, T045, T051: keep I/O off EDT and discard asynchronous results belonging to a logged-out/replaced session.
+- T038, T046, T055–T056: verify conflicting reviews, response-loss retries, concurrent settlements, rollback, restart and consistent backup/restore with the selected durable adapter; retain source/audit records.
+- T009–T011, T053: use the fenced class/activity/deployment sources in `design.md` as the current Lab 7 design; export/synchronize planned standalone diagrams and demonstrate rendering later. Rendering is not marked complete.
+
 ## Phase 0: Scope and Product Decision Gates
 
 **Purpose**: Confirm the desktop MVP boundary and resolve only the product decisions that block safe implementation. Do not silently substitute defaults.
@@ -36,7 +51,7 @@
 - [ ] T011 [P] Create `specs/001-splitsmart-feature/diagrams/expense-approval-balance.puml` for submit, validate, notify, review, approve/reject, and exactly-once balance effect. Verify pending/rejected paths have no balance effect. Depends on T006.
 - [ ] T012 Establish base packages and application composition/bootstrap boundaries under `src/main/java/com/splitsmart/` (`domain`, `application`, `infrastructure`, `ui`, `config`) without embedding domain rules in Swing. Verify dependency direction through package-level review. Depends on T006, T007, T009.
 - [ ] T013 Define shared domain error/validation conventions and application port interfaces for transactions, current-user access, and repositories under `src/main/java/com/splitsmart/application/port/`. Verify invalid operations return explicit errors and do not produce success-shaped fallbacks. Depends on T002, T012.
-- [ ] T014 [P] Add a requirement-to-code/test traceability checklist to `specs/001-splitsmart-feature/README.md` or the project `README.md` (choose one canonical location) mapping every accepted FR/AC to planned component and evidence. Keep unsupported/deferred platform scope visibly separate. Verify all IDs in `spec.md` appear. Depends on T006.
+- [ ] T014 [P] Maintain `specs/001-splitsmart-feature/requirements-traceability.md` as the canonical requirement-to-design/code/test checklist. Lab 7 supplies the design and proposed-verification mapping; add actual implementation/test paths and reviewed evidence as they become available. Map every accepted FR/NFR/AC, keep unsupported platforms separate, and verify all IDs in `spec.md`. Depends on T006 for implementation evidence.
 
 ## Phase 2: User Story 1 - Access a Personal Account (Priority: P1)
 

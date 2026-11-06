@@ -4,6 +4,17 @@
 
 **Status**: Planning only. No Java implementation is authorized or included in this plan.
 
+
+## Lab 7 Selected Architecture and Design References
+
+The [Lab 7 review](Lab7_Architecture_Review.md) and [consolidation instructions](Lab7_Consolidation_Instructions.md) select the baseline layered design. [architecture-selected.md](architecture-selected.md) consolidates the decision; [design.md](design.md) supplies current conceptual diagrams; [requirements-traceability.md](requirements-traceability.md) is the canonical detailed evidence map. Original baseline and alternative proposals are preserved as comparison evidence. No event sourcing, CQRS, event journal or projection/replay machinery is selected.
+
+Adopt durable UnitOfWork/repository contracts, atomic conditional approval, atomic payment eligibility/insertion, durable retry identity, retained source/audit records, session-bound background work with EDT-only UI updates, and actual-adapter restart/rollback/concurrency/recovery verification. Balances remain derived from approved expense shares and payments. These reliability refinements do not select a storage engine: SQLite/JDBC is only an evaluation option.
+
+**Open-decision gates:** [G1–G8](architecture-selected.md#open-decision-gates) preserve all decisions below and T001–T005, including desktop-scope acceptance, storage, currencies, payer eligibility, account/admin lifecycle, approval policy, payment/notification corrections and reporting/quality criteria. Architecture selection is not platform approval; NFR-001 / US6 / SC-005 remain unmet by Swing.
+
+The fenced diagrams in `design.md` are the current Lab 7 design sources. The standalone `.puml` files listed below remain future synchronized export/render tasks; their creation/rendering is not claimed by this consolidation. No application code or Maven configuration is implemented here.
+
 ## Summary
 
 Plan a Java 21 desktop MVP, built with Maven, that covers the candidate Swing subset in the feature specification: individual accounts, groups, shared expenses with equal or percentage splits and optional receipts, single-level expense review, in-app notifications, pairwise balances, payment recording, and date-filtered summaries. JUnit 5 will verify domain and application behavior independently of Swing; PlantUML will document the planned component, domain, and workflow designs.

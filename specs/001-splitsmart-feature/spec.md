@@ -8,6 +8,15 @@
 
 **Input**: User description: "Read UserRequirement.md in this workspace as the authoritative customer requirements. Write a testable SplitSmart feature specification: actors, user scenarios, functional and non-functional requirements, acceptance criteria, requirement IDs (FR-001, etc.), and open questions. Preserve all original customer features in the requirements inventory; label the Java Swing MVP subset separately."
 
+
+## Lab 7 Architecture Decision and Open Gates
+
+The selected design is the [baseline layered architecture with reliability improvements](architecture-selected.md), following the [Lab 7 review](Lab7_Architecture_Review.md) and [consolidation instructions](Lab7_Consolidation_Instructions.md). [design.md](design.md) provides class/activity/deployment diagrams; [requirements-traceability.md](requirements-traceability.md) is the canonical mapping to proposed verification. This is an implementation/design decision, not a new customer requirement or approval of the proposed desktop milestone. Existing FR/NFR/AC/SC definitions and confirmed clarifications remain unchanged. Event sourcing and CQRS are not selected.
+
+**Open gates:** G1 desktop/platform acceptance; G2 durable storage/transactions/receipts/recovery/distribution; G3 currencies/remainder order/zero shares; G4 payer group eligibility; G5 account/admin lifecycle; G6 approval/correction policy; G7 notification/payment lifecycle; G8 reporting and measurable quality/security/privacy criteria. See the [gate register](architecture-selected.md#open-decision-gates); the existing Open Questions remain unresolved. Selecting an architecture does not close T001–T005 or approve SQLite/JDBC.
+
+**Platform status:** NFR-001 / US6 / SC-005 are unmet by Swing. Primary web, Android and iOS delivery remains in the full customer scope.
+
 ## Purpose and Scope
 
 SplitSmart helps individuals and groups record shared expenses, review them, track resulting balances and payments, and report on that activity. `UserRequirement.md` is the authoritative source for customer-stated product scope. This specification preserves every feature from that request and distinguishes those requirements from implementation decisions.
